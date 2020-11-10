@@ -610,9 +610,9 @@ def main():
     options = parser.parse_args()
     
     try :
-        options.log_level = LOGLEVELS[options.verbosity]
+        options.log_level = logging.CRITICAL
         # logger_gen.setLevel(options.log_level)
-        logger_gen.setLevel(0)
+        logger_gen.setLevel(logging.CRITICAL)
     except :
         parser.error("Please specify a valid log level")
         
