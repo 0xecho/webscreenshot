@@ -557,7 +557,9 @@ def craft_cmd(url_and_options):
                            '-append %s' % craft_arg(output_filename_label) ]
         
         execution_retval_label = launch_cmd(logger_url, url, cmd_parameters, options, CONTEXT_IMAGEMAGICK)
-    
+    global SHELL_EXECUTION_ERROR
+    if execution_retval != SHELL_EXECUTION_ERROR:
+        print(output_filename)
     return execution_retval, url
 
 def take_screenshot(url_list, options):
