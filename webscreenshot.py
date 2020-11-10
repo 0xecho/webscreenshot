@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # This file is part of webscreenshot.
@@ -570,7 +570,7 @@ def take_screenshot(url_list, options):
     global SHELL_EXECUTION_OK, SHELL_EXECUTION_ERROR
     
     screenshot_number = len(url_list)
-    print("[+] %s URLs to be screenshot" % screenshot_number)
+    # print("[+] %s URLs to be screenshot" % screenshot_number)
     
     pool = multiprocessing.Pool(processes=int(options.workers), initializer=init_worker)
     
@@ -583,18 +583,18 @@ def take_screenshot(url_list, options):
     screenshots_error = sum(retval == SHELL_EXECUTION_ERROR for retval, url in taken_screenshots)
     screenshots_ok = int(screenshot_number - screenshots_error)
     
-    print("[+] %s actual URLs screenshot" % screenshots_ok)
-    print("[+] %s error(s)" % screenshots_error)
+    # print("[+] %s actual URLs screenshot" % screenshots_ok)
+    # print("[+] %s error(s)" % screenshots_error)
     
     if screenshots_error != 0:
         if not(options.no_error_file):
             with io.open(FAILED_SCREENSHOTS_FILE, 'w', newline='\n') as fd_out:
                 for url in screenshots_error_url:
                     fd_out.write(url + '\n')
-                    print("    %s" % url)
-        else:
-            for url in screenshots_error_url:
-                print("    %s" % url)
+                    # print("    %s" % url)
+        # else:
+            # for url in screenshots_error_url:
+                # print("    %s" % url)
 
     return None
 
@@ -605,13 +605,14 @@ def main():
     global VERSION, SCREENSHOTS_DIRECTORY, LOGLEVELS
     signal.signal(signal.SIGINT, kill_em_all)
     
-    print('webscreenshot.py version %s\n' % VERSION)
+    # print('webscreenshot.py version %s\n' % VERSION)
     
     options = parser.parse_args()
     
     try :
         options.log_level = LOGLEVELS[options.verbosity]
-        logger_gen.setLevel(options.log_level)
+        # logger_gen.setLevel(options.log_level)
+        logger_gen.setLevel(0)
     except :
         parser.error("Please specify a valid log level")
         
